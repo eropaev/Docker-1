@@ -1,0 +1,27 @@
+
+docker run -d --name spawning-pool --restart=on-failure:10 -e MYSQL_ROOT_PASSWORD=Kerrigan -e MYSQL_DATABASE=zerglings -v hatchery:/var/lib/mysql mysql --default-authentication-plugin=mysql_native_password
+
+
+/*
+
+-e, --env list — Set environment variables.
+
+Docker MySQL Persistence (Tech Tip #83):
+
+/var/lib/mysql is the default directory where MySQL container writes its files.
+
+mysql | Docker Documentation:
+
+MYSQL_ROOT_PASSWORD
+This variable is mandatory and specifies the password that will be set for the MySQL root superuser account.
+
+MYSQL_DATABASE
+This variable is optional and allows you to specify the name of a database to be created on image startup. If a user/password was supplied (see below) then that user will be granted superuser access (corresponding to GRANT ALL) to this database.
+
+Wordpress latest does not works with mysql latest container:
+
+MySQL 8 changed the password authentication method. You're looking for the mysql_native_password plugin https://dev.mysql.com/doc/refman/8.0/en/native-pluggable-authentication.html
+
+Or you could use mysql 5.7
+
+*/
